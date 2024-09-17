@@ -2,7 +2,7 @@
 
 This is the repository of SodaCoder.
 
-### Dataset
+## Dataset
 
 We present partial data used in the three phases of SODA framework, as follows:
 
@@ -14,7 +14,9 @@ We present partial data used in the three phases of SODA framework, as follows:
 
 We use the [LLaMA-Factory library](https://github.com/hiyouga/LLaMA-Factory) for the training and inference process. 
 
-### Code
+## Code
+
+We present the source code of the static tool which supports executing generated solutions with six programming languages  (i.e., Python, Java, Javascript, C, C++ and Go)
 
 ####  *We release partial data currently. We will release all code, data, and large code models after acceptance.*
 
