@@ -18,5 +18,5 @@ We use the [LLaMA-Factory library](https://github.com/hiyouga/LLaMA-Factory) for
 
 We present the source code of the static tool which supports executing generated solutions with six programming languages (i.e., Python, Java, Javascript, C, C++ and Go) in [toolExecution](https://github.com/yujiachen99/SodaCoder/tree/main/toolExecution).
 
-####  *We release partial data currently. We will release all code, data, and large code models after acceptance.*
+####  *We release partial data currently. We will release all code, data, and models after acceptance.*
 
