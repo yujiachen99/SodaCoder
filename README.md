@@ -1,6 +1,6 @@
 # SodaCoder
 
-This is the repository of SodaCoder.
+This is the repository of our SODA framework.
 
 ## Dataset
 
