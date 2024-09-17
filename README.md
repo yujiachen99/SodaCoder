@@ -1,4 +1,4 @@
-# SodaCoder
+# Smaller but Better: Self-Paced Knowledge Distillation for Lightweight yet Effective LCMs
 
 This is the repository of our SODA framework.
 
