@@ -23,14 +23,11 @@ def execute_cpp(completion: str, timeout: float):
         code_path = os.path.join(tmpdirname, "code.cpp")
         exec_path = os.path.join(tmpdirname, "exec")
 
-        # 将代码写入一个临时文件
         with open(code_path, "w") as file:
             file.write(completion)
 
-        # 尝试编译C代码
         compile_result = subprocess.run(["g++", code_path, "-o", exec_path], capture_output=True)
         if compile_result.returncode != 0:
-            # 编译失败
             try: 
                 output = compile_result.stderr.decode('utf-8')
             except UnicodeDecodeError:
@@ -39,7 +36,7 @@ def execute_cpp(completion: str, timeout: float):
             return {"passed":False , "result": f"compile_error: {output}"}
             # return {"output": compile_result.stderr, "error": True, "type": "compile_error"}
 
-        # 尝试执行编译后的程序
+    
         try:
             exec_result = subprocess.run([exec_path], capture_output=True, timeout=timeout)  # 使用timeout参数
             if exec_result.returncode == 0:
@@ -70,21 +67,21 @@ def execute_c(completion: str, timeout: float):
         code_path = os.path.join(tmpdirname, "code.c")
         exec_path = os.path.join(tmpdirname, "exec")
 
-        # 将代码写入一个临时文件
+       
         with open(code_path, "w") as file:
             file.write(completion)
 
-        # 尝试编译C代码
+       
         compile_result = subprocess.run(["gcc", code_path, "-o", exec_path], capture_output=True)
         if compile_result.returncode != 0:
             try: 
                 output = compile_result.stderr.decode('utf-8')
             except UnicodeDecodeError:
                 output = compile_result.stderr.decode('latin1')
-            # 编译失败
+          
             return {"passed":False , "result": f"compile_error: {output}"}
             # return {"output": compile_result.stderr, "error": True, "type": "compile_error"}
-        # 尝试执行编译后的程序
+    
         try:
             exec_result = subprocess.run([exec_path], capture_output=True, timeout=timeout)  # 使用timeout参数
             try: 
@@ -109,26 +106,26 @@ def execute_c(completion: str, timeout: float):
 def execute_java(completion: str, timeout: float):
     
     def extract_class_name(completion):
-    # 使用正则表达式查找类名
+    
         match = re.search(r'public\s+class\s+(\w+)', completion)
         if match:
-            return match.group(1)  # 返回找到的类名
+            return match.group(1)  
         return None
     
     with tempfile.TemporaryDirectory() as tmpdirname:
         class_name = extract_class_name(completion)
         if not class_name:
-            # 如果无法从代码中提取类名，返回错误
+            
             return {"passed":False , "result":"compile_error: No public class name found in the provided Java code."}
         
-        # Java代码通常以public class Main开始
+       
 
         code_path = os.path.join(tmpdirname, f"{class_name}.java")
         
         with open(code_path, "w",encoding='utf-8') as file:
             file.write(completion)
 
-        # 编译Java代码
+        
         compile_result = subprocess.run(["javac", code_path], capture_output=True)
         if compile_result.returncode != 0:
 
@@ -140,7 +137,7 @@ def execute_java(completion: str, timeout: float):
             return {"passed":False , "result": f"compile_error: {output}"}
             # return {"output": compile_result.stderr, "error": True, "type": "compile_error"}
         
-        # 运行Java程序
+        
         try:
             exec_result = subprocess.run(["java", "-cp", tmpdirname, class_name], capture_output=True, timeout=timeout)
             if exec_result.returncode == 0:
